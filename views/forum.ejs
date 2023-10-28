@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forum</title>
+  <link rel="stylesheet" type="text/css" href="/styles/main.css">
+  <style>
+    /* CSS styles for the navigation bar */
+    .navbar {
+      background-color: #0d0d0d;
+      padding: 10px;
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-button {
+      padding: 4px;
+      border: none;
+      background-color: #0d0d0d;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      height: 20px;
+      width: 20px;
+      margin-right: 10px;
+    }
+
+    .navbar-dropdown {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 100px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      top: 30px;
+      right: 10px;
+    }
+
+    .navbar-item {
+      padding: 8px 16px;
+      text-decoration: none;
+      display: block;
+      color: #333;
+      font-size: 12px;
+    }
+
+    .navbar-item:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="topnav">
+    <a class="active" href="forum">Home</a>
+    <a href="">Database</a>
+  </div>
+    </nav>
+  </div>
+
+  <h2>Threads</h2>
+  <ul>
+    <% threads.forEach(thread => { %>
+      <li>
+        <a href="/thread/<%= thread.id %>"><%= thread.title %></a>
+      </li>
+    <% }); %>
+  </ul>
+
+  <h2>Create a New Thread</h2>
+  <form action="/thread/create" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required><br>
+
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" required></textarea><br>
+
+    <button type="submit">Create Thread</button>
+  </form>
+
+  <script>
+    function toggleNavbar() {
+      const navbar = document.getElementById('navbar');
+      navbar.style.display = navbar.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>

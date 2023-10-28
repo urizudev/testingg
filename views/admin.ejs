@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" type="text/css" href="/styles/main.css">
+  <style>
+    /* Additional CSS for Admin Panel */
+    .admin-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .admin-title {
+      margin-bottom: 20px;
+    }
+    .admin-form {
+      margin-bottom: 20px;
+    }
+    .admin-form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .admin-form input[type="text"],
+    .admin-form input[type="password"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    .admin-form button {
+      padding: 10px 20px;
+    }
+    .admin-thread-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .admin-thread-list li {
+      margin-bottom: 10px;
+    }
+    .admin-thread-list .thread-title {
+      font-weight: bold;
+    }
+    .admin-thread-list .delete-btn {
+      margin-left: 10px;
+    }
+    .admin-user-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .admin-user-list li {
+      margin-bottom: 10px;
+    }
+    .admin-user-list .username {
+      font-weight: bold;
+    }
+    .admin-user-list .promote-btn {
+      margin-left: 10px;
+    }
+    .admin-rank-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .admin-rank-list li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <h1 class="admin-title">Admin Panel</h1>
+
+    <h2>Threads</h2>
+    <ul class="admin-thread-list">
+      <% threads.forEach(thread => { %>
+        <li>
+          <span class="thread-title"><%= thread.title %></span>
+          <a class="delete-btn" href="/admin/thread/delete/<%= thread.id %>">Delete</a>
+        </li>
+      <% }); %>
+    </ul>
+
+    <h2>Users</h2>
+    <ul class="admin-user-list">
+      <% users.forEach(user => { %>
+        <li>
+          <span class="username"><%= user.username %></span>
+          <a class="promote-btn" href="/admin/user/promote/<%= user.username %>">Promote</a>
+        </li>
+      <% }); %>
+    </ul>
+
+    <h2>Create Rank</h2>
+    <form class="admin-form" action="/admin/rank/create" method="post">
+      <label for="rankName">Rank Name:</label>
+      <input type="text" id="rankName" name="rankName" required>
+
+      <button type="submit">Create Rank</button>
+    </form>
+
+    <h2>Ranks</h2>
+    <ul class="admin-rank-list">
+      <% ranks.forEach(rank => { %>
+        <li><%= rank %></li>
+      <% }); %>
+    </ul>
+  </div>
+</body>
+</html>
